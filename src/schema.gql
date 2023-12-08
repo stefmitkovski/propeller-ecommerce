@@ -1,0 +1,62 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  id: ID!
+  price: Float!
+  status: StatusEnum!
+  images: [Image!]
+}
+
+enum StatusEnum {
+  Active
+  Inactive
+}
+
+type Image {
+  id: ID!
+  url: String!
+  priority: Int!
+  product: Product
+}
+
+type Query {
+  products: [Product!]!
+  product(id: ID!): Product
+  images: [Image!]!
+  image(id: ID!): Image
+}
+
+type Mutation {
+  createProduct(input: CreateProductInput!): Product
+  updateProduct(id: ID!, input: UpdateProductInput!): Product
+  deleteProduct(id: ID!): Product
+  createImage(input: CreateImageInput!): Image
+  updateImage(id: ID!, input: UpdateImageInput!): Image
+  deleteImage(id: ID!): Image
+}
+
+input CreateProductInput {
+  price: Float!
+  status: StatusEnum = Active
+  images: [CreateImageInput!]
+}
+
+input CreateImageInput {
+  id: ID
+  url: String
+  priority: Int = 1000
+}
+
+input UpdateProductInput {
+  price: Float
+  status: StatusEnum
+  images: [CreateImageInput!]
+}
+
+input UpdateImageInput {
+  id: ID
+  url: String
+  priority: Int
+}
