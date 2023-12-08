@@ -1,4 +1,5 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
+import { IsUrl } from 'class-validator';
 import { Product } from 'src/products/entities/product.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -12,6 +13,7 @@ export class Image {
 
   @Column({nullable: true})
   @Field(() => String)
+  @IsUrl({},{message: "Not a valid Url"})
   url: String
 
   @Column({default: 1000, nullable: true})

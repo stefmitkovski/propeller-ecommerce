@@ -57,7 +57,7 @@ export class ProductsService {
     const productToUpdate = await this.productRepository.findOne({where: {id}, relations: ['images'] });
 
     if (!productToUpdate) {
-      throw new Error(`Product with ID ${id} not found`);
+      throw new Error("There isn\'t any products with that ID");
     }
 
     if (updateProductInput.images !== undefined) {
@@ -84,8 +84,8 @@ export class ProductsService {
       productToUpdate.images = updatedImages;
     }
 
-    
-    const updatedProduct = await this.productRepository.save({...productToUpdate, ...UpdateProductInput});
+    const { images, ...updateDataWithoutImages } = updateProductInput;
+    const updatedProduct = await this.productRepository.save({...productToUpdate, ...updateDataWithoutImages});
 
     return updatedProduct;
   }
