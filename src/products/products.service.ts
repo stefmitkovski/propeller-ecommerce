@@ -82,6 +82,7 @@ export class ProductsService {
       );
 
       productToUpdate.images = updatedImages;
+      this.productRepository.save(productToUpdate)
     }
 
     const { images, ...updateDataWithoutImages } = updateProductInput;
